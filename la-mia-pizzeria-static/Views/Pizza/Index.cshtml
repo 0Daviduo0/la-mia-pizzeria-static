@@ -1,0 +1,35 @@
+﻿@model List<Pizza>
+
+
+<a href="@Url.Action("Create", "Pizza")" class="btn btn-primary">Aggiungi una nuova pizza</a>
+<ul class="container flex-wrap">
+    @foreach(Pizza pizza in Model)
+    {
+        
+            <li class="card">
+                <a href="@Url.Action("Details", "Pizza", new{id=@pizza.Id})"
+                   style="text-decoration: none; color: black;">
+                    <img src="@pizza.Img" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">@pizza.Nome</h5>
+                        <h6>@pizza.Prezzo&euro;</h6>
+                    </div>
+                </a>
+                <div class="buttonsContainer">
+
+                    <div class="UpdateButn">
+                        <a href="@Url.Action("Update", "Pizza", new {Id = pizza.Id})" class="btn btn-primary">Modifica pizza</a>
+                    </div>
+
+                    <div class="DeleteButn">
+                        <form asp-controller="Pizza" asp-action="Delete" asp-route-id="@pizza.Id" method="post">
+                        <button class="btn btn-danger" type="submit">Cancella la pizza</button>
+                        </form>
+                    </div>
+
+                </div>
+                
+            </li>
+        
+    }
+</ul>
